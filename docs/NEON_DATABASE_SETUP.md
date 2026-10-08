@@ -28,7 +28,7 @@ NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 Do not check this file into version control. Do not commit a real password or secret to `.env.example`.
 
 ### Next development steps (after database exists)
-1. Check compatibility: the current Next.js version is 16.4.0 and Node is 24.21.0; check Payload and TypeScript version requirements before installing.
+1. Check compatibility: the current Next.js version is 16.4.0 and Node is 24.21.0. The current Payload installation guide requires TypeScript 6.0.3+; the repository currently uses TypeScript ^5, so upgrade TypeScript on this feature branch when installing Payload. Check whether cacheComponents / partialPrefetching should be disabled during integration, since Payload's cacheComponents compatibility is not yet guaranteed.
 2. Install compatible `payload`, `@payloadcms/next`, `@payloadcms/db-postgres`, `@payloadcms/richtext-lexical`, and media dependencies.
 3. Introduce separate `(frontend)` and `(payload)` route groups to avoid root layout conflicts; preserve existing routes and all homepage content.
 4. Create protected Users and Media collections and model Products, Categories, News, Promotions, Dealers.
@@ -41,3 +41,6 @@ Do not check this file into version control. Do not commit a real password or se
 - https://neon.com/docs/get-started/connect-neon
 - https://payloadcms.com/docs/getting-started/installation
 - https://payloadcms.com/docs/database/postgres
+
+### Project verification checkpoint
+The linked Neon tools require a **Project ID** and do not provide a project-listing or project-creation action in this session. Finish creating the project in the Neon Console and find its project ID under Project Settings or in the console URL. Sharing the Project ID is OK; **never share the PostgreSQL connection string**. Once the ID is known, verify its branches and databases before creating any new database to avoid duplicates.
