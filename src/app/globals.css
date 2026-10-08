@@ -265,3 +265,9 @@ button { cursor: pointer; }
   .product-detail-grid .product-visual { height:210px; }
 }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; } }
+
+/* Official SKYWORTH transparent wordmark */
+.brand-wordmark { display:inline-flex; align-items:center; flex-shrink:0; padding:0; line-height:0; }
+.brand-logo { display:block; width:clamp(138px,12vw,181px); height:auto; }
+.brand-logo--footer { filter:invert(1); }
+@media (max-width:760px) { .brand-logo { width:145px; } }

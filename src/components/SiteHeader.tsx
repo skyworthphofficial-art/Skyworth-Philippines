@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -20,7 +21,7 @@ export default function SiteHeader() {
     <header className="site-header">
       <div className="container-wide nav-inner">
         <Link href="/" className="brand-wordmark" aria-label="SKYWORTH Philippines home" onClick={() => setMenuOpen(false)}>
-          SKYWORTH<span className="brand-dot">.</span>
+          <Image src="/images/skyworth-logo-black.png" width={583} height={85} alt="SKYWORTH" className="brand-logo" priority />
         </Link>
         <nav id="site-menu" aria-label="Main navigation" className={`nav-links ${menuOpen ? "nav-links--open" : ""}`}>
           {navigation.map(({ href, label }) => (
