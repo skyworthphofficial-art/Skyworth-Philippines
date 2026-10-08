@@ -21,7 +21,9 @@ export default function SiteHeader() {
     <header className="site-header">
       <div className="container-wide nav-inner">
         <Link href="/" className="brand-wordmark" aria-label="SKYWORTH Philippines home" onClick={() => setMenuOpen(false)}>
-          <Image src="/images/skyworth-logo-black.png" width={583} height={85} alt="SKYWORTH" className="brand-logo" priority />
+          
+<Image src="/images/SKYWORTH LOGO Black .png"width={583}height={83} alt="SKYWORTH" className="brand-logo"style={{ transform: "translateY(6px)" }} priority/>
+
         </Link>
         <nav id="site-menu" aria-label="Main navigation" className={`nav-links ${menuOpen ? "nav-links--open" : ""}`}>
           {navigation.map(({ href, label }) => (
