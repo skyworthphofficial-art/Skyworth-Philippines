@@ -1,46 +1,60 @@
-# SKYWORTH Philippines — Neon PostgreSQL setup
+# SKYWORTH Philippines — Singapore Neon PostgreSQL
 
-Backend work branch: `feature/payload-neon`
+## Verified project details
 
-## Keep the website safe
+- Project: `skyworth-philippines-sg`
+- Project ID: `sweet-wildflower-59714934`
+- Region: **AWS Singapore (aws-ap-southeast-1)**
+- PostgreSQL: **18**
+- Default branch: `production` (ID: `br-hidden-lab-b30uw3ej`)
+- Development branch: `development` (ID: `br-rough-math-b3weinrp`)
+- Current database: `neondb`
+- Database owner/role: `neondb_owner`
 
-The public homepage and product catalog on `main` are unchanged.
-Payload routes, the PostgreSQL adapter, dependencies and migrations are **not** active yet.
+These are non-secret IDs. Never commit or share a real DATABASE_URL, role password, or PAYLOAD_SECRET.
 
-### Provision Neon database
-1. Go to https://console.neon.tech and sign in with an authorized SKYWORTH account.
-2. Create a new project named `skyworth-philippines`.
-3. Choose region Singapore (`ap-southeast-1`) when available; use the region closest to the deployment host if not.
-4. Name the database `skyworth_db`.
-5. Open **Connect** and copy the connection string; for initial development a direct connection is fine.
-6. Do not paste secrets into GitHub, a public issue or chat.
+## Get the development connection string
 
-### Local-only configuration
-
-Copy the following placeholders into a new local `.env.local` in the project root. Git ignores `.env*`.
+1. Open https://console.neon.tech/ and select the **skyworth-philippines-sg** project.
+2. Click **Connect**.
+3. Set **Branch = development** and **Database = neondb** (NOT the production branch).
+4. Choose the connection string for a Node.js/PostgreSQL client. Prefer a direct connection for local setup.
+5. Copy the connection string privately into `.env.local` at the root of the local Next.js project.
 
 ```dotenv
-DATABASE_URL="postgresql://USERNAME:PASSWORD@HOST/skyworth_db?sslmode=require"
-PAYLOAD_SECRET="REPLACE_WITH_A_RANDOM_64_CHARACTER_SECRET"
+DATABASE_URL="postgresql://ROLE:PASSWORD@HOST/neondb?sslmode=require"
+PAYLOAD_SECRET="GENERATE_A_LONG_RANDOM_SECRET_LOCALLY"
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 ```
 
-Do not check this file into version control. Do not commit a real password or secret to `.env.example`.
+The above values are examples only. `.env.local` is ignored by Git and must remain on the developer machine.
 
-### Next development steps (after database exists)
-1. Check compatibility: the current Next.js version is 16.4.0 and Node is 24.21.0. The current Payload installation guide requires TypeScript 6.0.3+; the repository currently uses TypeScript ^5, so upgrade TypeScript on this feature branch when installing Payload. Check whether cacheComponents / partialPrefetching should be disabled during integration, since Payload's cacheComponents compatibility is not yet guaranteed.
-2. Install compatible `payload`, `@payloadcms/next`, `@payloadcms/db-postgres`, `@payloadcms/richtext-lexical`, and media dependencies.
-3. Introduce separate `(frontend)` and `(payload)` route groups to avoid root layout conflicts; preserve existing routes and all homepage content.
-4. Create protected Users and Media collections and model Products, Categories, News, Promotions, Dealers.
-5. Configure `src/payload.config.ts` with `postgresAdapter({ pool: { connectionString: process.env.DATABASE_URL! } })`.
-6. Create admin account locally under `/admin` when all services run.
-7. Test staging product workflow before replacing demo catalog data.
+A safe local PowerShell command to create a cryptographic secret:
 
-## Key references
+```powershell
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
 
-- https://neon.com/docs/get-started/connect-neon
-- https://payloadcms.com/docs/getting-started/installation
+Only use the output locally as PAYLOAD_SECRET; never paste it into chat or GitHub.
+
+## Code safety
+
+- The live Next.js prototype remains on GitHub `main` and is not modified by the database provisioning process.
+- Backend work stays on `feature/payload-neon`.
+- Current `src/data/products.ts` demo catalog remains until a tested Payload adapter is available.
+- No changes to Shopify, domain, or SEO.
+- Do NOT use production DB branch for local Payload schema push/migrations.
+
+## Next implementation
+
+1. Pull and switch to the backend feature branch only when working tree is clean.
+2. Verify Next.js 16.4 + TypeScript + compatible Payload versions and app route layout structure.
+3. Install Payload and packages for Postgres, Next.js, rich text editing, and image handling.
+4. Configure `payload.config.ts`, public vs admin layouts, media/auth collections and /admin route.
+5. Run local typecheck and production build before introducing live content.
+6. Test a sample product; later switch frontend catalog reads from demo data to published CMS content.
+
+References:
 - https://payloadcms.com/docs/database/postgres
-
-### Project verification checkpoint
-The linked Neon tools require a **Project ID** and do not provide a project-listing or project-creation action in this session. Finish creating the project in the Neon Console and find its project ID under Project Settings or in the console URL. Sharing the Project ID is OK; **never share the PostgreSQL connection string**. Once the ID is known, verify its branches and databases before creating any new database to avoid duplicates.
+- https://payloadcms.com/docs/getting-started/installation
+- https://neon.com/docs/get-started/connect-neon
