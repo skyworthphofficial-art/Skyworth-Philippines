@@ -19,7 +19,11 @@ export default function SiteFooter() {
       </div>)}
     </div>
     <div className="container-wide footer-bottom">
-      <span>© {new Date().getFullYear()} SKYWORTH Philippines. Website design prototype.</span>
+      
+<span>
+  © 2026 SKYWORTH Philippines. All Rights Reserved.
+</span>
+
       <span>Independent corporate website concept · No online checkout</span>
     </div>
   </footer>;
