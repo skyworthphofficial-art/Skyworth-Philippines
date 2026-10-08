@@ -8,7 +8,7 @@ Verify `git status` reports a clean working tree on `feature/payload-neon`.
 ## 1. Install dependencies (PowerShell)
 ```powershell
 git pull origin feature/payload-neon
-npm.cmd install payload @payloadcms/next @payloadcms/db-postgres @payloadcms/richtext-lexical sharp
+npm.cmd install payload @payloadcms/next @payloadcms/db-postgres @payloadcms/richtext-lexical sharp graphql
 npm.cmd install -D "typescript@^6.0.3"
 ```
 This updates `package.json` and `package-lock.json` on your computer. Commit both after you verify startup.
@@ -24,7 +24,7 @@ Do not paste these values into chat or commit `.env.local`.
 To verify variable keys only (no values) in PowerShell:
 ```powershell
 $names = Get-Content .env.local | Where-Object { $_ -match '^\s*[A-Z_]+\s*=' } | ForEach-Object { ($_ -split '=',2)[0].Trim() }
-'DATABASE_URL','PAYLOAD_SECRET' | ForEach-Object { "$_: $($_ -in $names)" }
+'DATABASE_URL','PAYLOAD_SECRET' | ForEach-Object { "$($_): $($_ -in $names)" }
 ```
 
 ## 3. Generate admin import map and run
@@ -44,7 +44,9 @@ npx.cmd tsc --noEmit
 npm.cmd run lint
 npm.cmd run build
 git status
-git add package.json package-lock.json src/app/\(payload\)/admin/importMap.js
+git add package.json package-lock.json
+# Only if the import map changed:
+git add -- 'src/app/(payload)/admin/importMap.js'
 git commit -m "Install Payload CMS and PostgreSQL dependencies"
 git push
 ```
