@@ -1,18 +1,21 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import ProductVisual from "@/components/ProductVisual";
 import { categories, products, type ProductCategory } from "@/data/products";
 
 export default function ProductCatalog() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const initial = searchParams.get("category");
-  const [category, setCategory] = useState<ProductCategory | "All">(
-    categories.find(c => c === initial) ?? "All"
-  );
+  const category: ProductCategory | "All" = categories.find(c => c === initial) ?? "All";
   const [search, setSearch] = useState("");
+
+  function selectCategory(next: ProductCategory | "All") {
+    router.replace(next === "All" ? "/products" : `/products?category=${encodeURIComponent(next)}`, { scroll: false });
+  }
   const filtered = useMemo(() => products.filter(product =>
     (category === "All" || product.category === category) &&
     `${product.name} ${product.summary} ${product.category}`.toLowerCase().includes(search.toLowerCase())
@@ -21,7 +24,7 @@ export default function ProductCatalog() {
   return <>
     <div className="catalog-controls">
       <div className="catalog-filters" role="group" aria-label="Filter by product category">
-        {(["All", ...categories] as const).map(item => <button type="button" key={item} onClick={() => setCategory(item)} aria-pressed={category === item} className={`filter-chip ${category === item ? "filter-chip--active" : ""}`}>{item}</button>)}
+        {(["All", ...categories] as const).map(item => <button type="button" key={item} onClick={() => selectCategory(item)} aria-pressed={category === item} className={`filter-chip ${category === item ? "filter-chip--active" : ""}`}>{item}</button>)}
       </div>
       <label className="catalog-search"><span className="sr-only">Search products</span><input value={search} onChange={event => setSearch(event.target.value)} placeholder="Search product collections..." type="search" /><span aria-hidden="true">⌕</span></label>
     </div>
