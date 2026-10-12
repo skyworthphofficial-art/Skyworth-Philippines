@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import ProductCatalog from "@/components/ProductCatalog";
 import { getPublishedProducts } from "@/lib/server/publicProducts";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = { title: "Products", description: "Browse SKYWORTH Philippines products and discover your next brilliant experience." };
 
 export default async function ProductsPage() {
