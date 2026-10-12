@@ -20,10 +20,14 @@ export default function ProductVisual({ type, className = "" }: Props) {
           <div className="product-aircon-light" />
         </div>
       )}
-      {type === "washer" && (
-        <div className="product-washer">
-          <div className="product-washer-dial" />
-          <div className="product-washer-drum" />
+      {type === "commercial" && (
+        <div className="product-commercial">
+          <div className="product-commercial-display">
+            <div className="product-commercial-glow" />
+            <div className="product-commercial-message" />
+            <div className="product-commercial-message product-commercial-message--short" />
+          </div>
+          <div className="product-commercial-base" />
         </div>
       )}
       {type === "audio" && (
