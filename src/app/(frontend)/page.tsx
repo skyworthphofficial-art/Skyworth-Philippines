@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProductVisual from "@/components/ProductVisual";
-import { products } from "@/data/products";
+import { getPublishedProducts } from "@/lib/server/publicProducts";
 
 const categoryCards = [
   { title: "Television", category: "Televisions", caption: "A brilliant view for every moment", visual: "tv" as const, number: "01" },
@@ -10,7 +10,8 @@ const categoryCards = [
   { title: "Air Conditioner", category: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "04" },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const featuredProducts = (await getPublishedProducts()).slice(0, 3);
   return <>
     
 {/* HOMEPAGE HERO BANNER */}
@@ -63,14 +64,17 @@ export default function HomePage() {
     <section className="section section--white" id="featured">
       <div className="container-wide">
         <div className="section-heading section-heading--inline"><div><span className="eyebrow">EXPLORE THE COLLECTION</span><h2>Find your<br /><span className="muted-heading">perfect match.</span></h2></div><Link className="text-link" href="/products">View all products <span aria-hidden="true">↗</span></Link></div>
-        <div className="featured-grid">
-          {products.slice(0, 3).map(product => <Link className="featured-card" key={product.slug} href={`/products/${product.slug}`}>
-            <div className="featured-card-top"><span>{product.eyebrow.toUpperCase()}</span><span aria-hidden="true">↗</span></div>
-            <ProductVisual type={product.visual} />
-            <h3>{product.name}</h3><p>{product.summary}</p>
+        {featuredProducts.length > 0 ? <div className="featured-grid">
+          {featuredProducts.map(product => <Link className="featured-card" key={product.id} href={`/products/${product.slug}`}>
+            <div className="featured-card-top"><span>{product.category.toUpperCase()}</span><span aria-hidden="true">↗</span></div>
+            <div className="catalog-product-image">
+              {product.images[0]
+                ? <Image src={product.images[0].url} alt={product.images[0].alt} width={product.images[0].width} height={product.images[0].height} unoptimized />
+                : <span className="catalog-image-fallback">SKYWORTH</span>}
+            </div>
+            <h3>{product.name}</h3><p>{product.summary || product.modelCode}</p>
           </Link>)}
-        </div>
-        <p className="demo-disclaimer">Collection labels and illustrations are placeholders for the design prototype. Final content will use approved local product data.</p>
+        </div> : <p className="empty-results">Our featured products are coming soon. Explore SKYWORTH's range of brilliant experiences.</p>}
       </div>
     </section>
 
