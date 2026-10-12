@@ -29,6 +29,11 @@ export default function HomePage() {
     priority
     className="hero-banner-image"
   />
+
+  {/* Product CTA positioned below the feature icons on desktop */}
+  <Link href="/products" className="button button--blue hero-banner-cta">
+    Explore Products <span aria-hidden="true">↗</span>
+  </Link>
 </section>
 
 
