@@ -46,7 +46,7 @@ export default async function ProductPage({ params }: Props) {
     {product.images.length > 1 && <section className="section section--soft"><div className="container-wide">
       <span className="eyebrow">PRODUCT GALLERY</span><h2 className="detail-subheading">Every angle, considered.</h2>
       <div className="product-gallery">
-        {product.images.map((image, index) => <div key={index} className="product-gallery-item"><Image src={image.url} alt={image.alt} width={image.width} height={image.height} unoptimized /></div>)}
+        {product.images.map((image, index) => <div key={index} className="product-gallery-item"><div className="product-gallery-image"><Image src={image.url} alt={image.alt} fill sizes="(max-width: 500px) 90vw, (max-width: 760px) 45vw, 360px" style={{ objectFit: "contain" }} unoptimized /></div></div>)}
       </div>
     </div></section>}
 
