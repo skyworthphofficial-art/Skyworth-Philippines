@@ -74,7 +74,7 @@ export default async function HomePage() {
             </div>
             <h3>{product.name}</h3><p>{product.summary || product.modelCode}</p>
           </Link>)}
-        </div> : <p className="empty-results">Our featured products are coming soon. Explore SKYWORTH's range of brilliant experiences.</p>}
+        </div> : <p className="empty-results">Our featured products are coming soon. Explore SKYWORTH&apos;s range of brilliant experiences.</p>}
       </div>
     </section>
 
