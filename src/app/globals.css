@@ -408,3 +408,38 @@ button { cursor: pointer; }
     height: 100%;
   }
 }
+
+
+/* Payload-managed product photos, details, and specifications */
+.catalog-product-image,
+.product-detail-media {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:#f3f6fa;
+}
+.catalog-product-image { height:260px; padding:22px; }
+.catalog-product-image img,
+.product-detail-media img { width:100%; height:100%; object-fit:contain; }
+.featured-card .catalog-product-image { height:260px; margin:0 0 18px; background:transparent; }
+.product-detail-media { min-height:390px; height:390px; padding:24px; border-radius:12px; }
+.catalog-image-fallback { font-size:18px; font-weight:900; color:#9badc2; letter-spacing:.14em; }
+.product-content-section p { color:var(--muted); line-height:1.85; max-width:760px; margin:0 0 16px; }
+.product-gallery { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.product-gallery-item { background:#fff; border:1px solid #e3eaf3; border-radius:10px; height:340px; padding:20px; display:grid; place-items:center; }
+.product-gallery-item img { width:100%; height:100%; object-fit:contain; }
+.product-spec-list { border-top:1px solid #dce5ef; max-width:1000px; margin:0; }
+.product-spec-row { display:grid; grid-template-columns:minmax(130px,1fr) 2fr; gap:16px; padding:17px 0; border-bottom:1px solid #dce5ef; }
+.product-spec-row dt { font-size:13px; font-weight:700; color:#47627d; }
+.product-spec-row dd { font-size:14px; color:#142b46; margin:0; }
+.product-brochure { margin-top:27px; }
+@media(max-width:760px) {
+  .catalog-product-image, .featured-card .catalog-product-image { height:205px; }
+  .product-detail-media { height:275px; min-height:275px; }
+  .product-gallery-item { height:225px; }
+}
+@media(max-width:500px) {
+  .product-gallery { grid-template-columns:1fr; }
+  .product-spec-row { grid-template-columns:1fr; gap:6px; }
+}
