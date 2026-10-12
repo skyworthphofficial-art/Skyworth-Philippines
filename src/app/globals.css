@@ -273,3 +273,25 @@ button { cursor: pointer; }
 
 .brand-logo--footer { filter:invert(1); }
 @media (max-width:760px) { .brand-logo { width:145px; } }
+
+
+/* =================================
+   HOMEPAGE HERO BANNER
+   ================================= */
+
+.hero--banner {
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: #07162d;
+}
+
+.hero-banner-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-product-image {
+  object-fit: contain;
+}
