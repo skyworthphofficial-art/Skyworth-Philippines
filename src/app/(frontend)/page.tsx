@@ -4,10 +4,10 @@ import ProductVisual from "@/components/ProductVisual";
 import { products } from "@/data/products";
 
 const categoryCards = [
-  { title: "Televisions", caption: "Picture-perfect moments", visual: "tv" as const, number: "01" },
-  { title: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "02" },
-  { title: "Washing Machines", caption: "Everyday care, made simple", visual: "washer" as const, number: "03" },
-  { title: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "04" },
+  { title: "Television", category: "Televisions", caption: "A brilliant view for every moment", visual: "tv" as const, number: "01" },
+  { title: "Audio", category: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "02" },
+  { title: "Commercial Screen", category: "Commercial Screen", caption: "Display solutions for business", visual: "commercial" as const, number: "03" },
+  { title: "Air Conditioner", category: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "04" },
 ];
 
 export default function HomePage() {
@@ -39,7 +39,7 @@ export default function HomePage() {
           <p>From unforgettable movie nights to everyday comfort, find the SKYWORTH experience that fits your home.</p>
         </div>
         <div className="category-grid">
-          {categoryCards.map(card => <Link href={`/products?category=${encodeURIComponent(card.title)}`} key={card.title} className="category-card">
+          {categoryCards.map(card => <Link href={`/products?category=${encodeURIComponent(card.category)}`} key={card.title} className="category-card">
             <div className="category-meta"><span>{card.number} / EXPLORE</span><span aria-hidden="true">↗</span></div>
             <ProductVisual type={card.visual} />
             <div className="category-bottom"><h3>{card.title}</h3><p>{card.caption}</p></div>
