@@ -14,16 +14,23 @@ export default function HomePage() {
   return <>
     
 {/* HOMEPAGE HERO BANNER */}
-<div className="hero-visual">
+
+{/* HOMEPAGE HERO BANNER */}
+<section
+  className="hero hero--banner"
+  aria-label="SKYWORTH X79K QD-Mini LED TV"
+>
   <Image
-    src="/images/banners/tv-hero.png"
-    alt="SKYWORTH Television"
-    fill
+    src="/images/banners/X79K BANNER.png"
+    alt="SKYWORTH NEXO X79K QD-Mini LED TV"
+    width={1920}
+    height={794}
+    sizes="100vw"
     priority
-    sizes="(max-width: 760px) 100vw, 55vw"
-    className="hero-product-image"
+    className="hero-banner-image"
   />
-</div>
+</section>
+
 
     <section className="section section--white" id="discover">
       <div className="container-wide">
