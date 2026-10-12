@@ -10,7 +10,7 @@ export default function SiteFooter() {
   return <footer className="site-footer">
     <div className="container-wide footer-top">
       <div className="footer-intro">
-        <Link href="/" className="brand-wordmark" aria-label="SKYWORTH Philippines home"><Image src="/images/skyworth-logo-black.png" width={583} height={85} alt="SKYWORTH" className="brand-logo brand-logo--footer" /></Link>
+        <Link href="/" className="brand-wordmark" aria-label="SKYWORTH Philippines home"><Image src="/images/SKYWORTH LOGO Black .png" width={583} height={85} alt="SKYWORTH" className="brand-logo brand-logo--footer" /></Link>
         <p>A brilliant view made for modern living.</p>
       </div>
       {groups.map(group => <div key={group.name} className="footer-col">
