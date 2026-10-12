@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import "./globals.css";
+import "../globals.css";
 
 export const metadata: Metadata = {
   title: { default: "SKYWORTH Philippines | A Brilliant View", template: "%s | SKYWORTH Philippines" },

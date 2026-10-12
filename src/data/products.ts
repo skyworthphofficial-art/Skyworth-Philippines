@@ -1,4 +1,4 @@
-export type ProductCategory = "Televisions" | "Air Conditioners" | "Washing Machines" | "Audio";
+export type ProductCategory = "Televisions" | "Audio" | "Commercial Screen" | "Air Conditioners";
 
 export type Product = {
   slug: string;
@@ -7,7 +7,7 @@ export type Product = {
   eyebrow: string;
   summary: string;
   features: string[];
-  visual: "tv" | "aircon" | "washer" | "audio";
+  visual: "tv" | "audio" | "commercial" | "aircon";
 };
 
 // DEMO CONTENT ONLY. Replace with approved SKYWORTH Philippines products and specifications.
@@ -31,24 +31,6 @@ export const products: Product[] = [
     visual: "tv",
   },
   {
-    slug: "air-conditioner-collection",
-    name: "Air Conditioner Collection",
-    category: "Air Conditioners",
-    eyebrow: "Home Comfort",
-    summary: "Explore cooling solutions for different spaces and everyday routines.",
-    features: ["Discover available types", "Find the right capacity", "Explore support options"],
-    visual: "aircon",
-  },
-  {
-    slug: "washing-machine-collection",
-    name: "Washing Machine Collection",
-    category: "Washing Machines",
-    eyebrow: "Everyday Care",
-    summary: "Find laundry solutions built for modern homes.",
-    features: ["Explore different designs", "Compare key features", "Find dealers near you"],
-    visual: "washer",
-  },
-  {
     slug: "audio-collection",
     name: "Audio Collection",
     category: "Audio",
@@ -57,11 +39,29 @@ export const products: Product[] = [
     features: ["Browse sound solutions", "Learn about features", "Find authorized sellers"],
     visual: "audio",
   },
+  {
+    slug: "commercial-screen-collection",
+    name: "Commercial Screen Collection",
+    category: "Commercial Screen",
+    eyebrow: "Business Display",
+    summary: "Explore commercial display solutions for modern business environments.",
+    features: ["Discover digital signage possibilities", "Explore business display formats", "Contact SKYWORTH for details"],
+    visual: "commercial",
+  },
+  {
+    slug: "air-conditioner-collection",
+    name: "Air Conditioner Collection",
+    category: "Air Conditioners",
+    eyebrow: "Home Comfort",
+    summary: "Explore cooling solutions for different spaces and everyday routines.",
+    features: ["Discover available types", "Find the right capacity", "Explore support options"],
+    visual: "aircon",
+  },
 ];
 
 export const categories: ProductCategory[] = [
   "Televisions",
-  "Air Conditioners",
-  "Washing Machines",
   "Audio",
+  "Commercial Screen",
+  "Air Conditioners",
 ];

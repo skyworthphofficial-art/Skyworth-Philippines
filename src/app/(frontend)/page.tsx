@@ -1,40 +1,36 @@
+import Image from "next/image";
 import Link from "next/link";
 import ProductVisual from "@/components/ProductVisual";
 import { products } from "@/data/products";
 
 const categoryCards = [
-  { title: "Televisions", caption: "Picture-perfect moments", visual: "tv" as const, number: "01" },
-  { title: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "02" },
-  { title: "Washing Machines", caption: "Everyday care, made simple", visual: "washer" as const, number: "03" },
-  { title: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "04" },
+  { title: "Television", category: "Televisions", caption: "A brilliant view for every moment", visual: "tv" as const, number: "01" },
+  { title: "Audio", category: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "02" },
+  { title: "Commercial Screen", category: "Commercial Screen", caption: "Display solutions for business", visual: "commercial" as const, number: "03" },
+  { title: "Air Conditioner", category: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "04" },
 ];
 
 export default function HomePage() {
   return <>
-    <section className="hero" aria-labelledby="home-heading">
-      <div className="hero-shine" />
-      <div className="container-wide hero-inner">
-        <div className="hero-copy">
-          <div className="eyebrow eyebrow--light"><span className="eyebrow-line" /> A NEW PERSPECTIVE ON ENTERTAINMENT</div>
-          <h1 id="home-heading">Brilliant living.<br /><span>Made possible.</span></h1>
-          <p>Welcome to a world of remarkable home experiences. Discover the next chapter of SKYWORTH Philippines.</p>
-          <div className="hero-actions">
-            <Link className="button button--white" href="/products">Explore Products <span aria-hidden="true">↗</span></Link>
-            <Link className="button button--outline-white" href="/technologies">Discover Our Technology <span aria-hidden="true">→</span></Link>
-          </div>
-          <div className="hero-caption"><span className="hero-caption-dot" /> TECHNOLOGY FOR MODERN HOMES</div>
-        </div>
-        <div className="hero-visual" aria-label="Illustrative television visual; not an actual product photo" role="img">
-          <div className="hero-orbit hero-orbit--one" /><div className="hero-orbit hero-orbit--two" />
-          <div className="hero-television">
-            <div className="hero-screen"><div className="hero-screen-horizon" /><div className="hero-screen-ridge" /><div className="hero-screen-glow" /></div>
-            <div className="hero-tv-foot" />
-          </div>
-          <div className="hero-visual-label"><span>THE BRILLIANT VIEW</span><span>SKYWORTH DISPLAY EXPERIENCE</span></div>
-        </div>
-      </div>
-      <div className="hero-bottom container-wide"><span>DISCOVER MORE</span><a href="#discover" aria-label="Scroll to discover products">↓</a><span>01 / 04</span></div>
-    </section>
+    
+{/* HOMEPAGE HERO BANNER */}
+
+{/* HOMEPAGE HERO BANNER */}
+<section
+  className="hero hero--banner"
+  aria-label="SKYWORTH X79K QD-Mini LED TV"
+>
+  <Image
+    src="/images/banners/X79K BANNER.png"
+    alt="SKYWORTH NEXO X79K QD-Mini LED TV"
+    width={1920}
+    height={794}
+    sizes="100vw"
+    priority
+    className="hero-banner-image"
+  />
+</section>
+
 
     <section className="section section--white" id="discover">
       <div className="container-wide">
@@ -43,7 +39,7 @@ export default function HomePage() {
           <p>From unforgettable movie nights to everyday comfort, find the SKYWORTH experience that fits your home.</p>
         </div>
         <div className="category-grid">
-          {categoryCards.map(card => <Link href={`/products?category=${encodeURIComponent(card.title)}`} key={card.title} className="category-card">
+          {categoryCards.map(card => <Link href={`/products?category=${encodeURIComponent(card.category)}`} key={card.title} className="category-card">
             <div className="category-meta"><span>{card.number} / EXPLORE</span><span aria-hidden="true">↗</span></div>
             <ProductVisual type={card.visual} />
             <div className="category-bottom"><h3>{card.title}</h3><p>{card.caption}</p></div>
