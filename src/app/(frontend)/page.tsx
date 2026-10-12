@@ -3,6 +3,8 @@ import Link from "next/link";
 import ProductVisual from "@/components/ProductVisual";
 import { getPublishedProducts } from "@/lib/server/publicProducts";
 
+export const dynamic = "force-dynamic";
+
 const categoryCards = [
   { title: "Television", category: "Televisions", caption: "A brilliant view for every moment", visual: "tv" as const, number: "01" },
   { title: "Audio", category: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "02" },
