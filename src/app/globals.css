@@ -392,3 +392,19 @@ button { cursor: pointer; }
     padding: 0 20px;
   }
 }
+
+/* KEEP PRODUCTS MENU OPEN WHILE INSIDE HEADER */
+
+@media (min-width: 761px) {
+  .nav-links {
+    height: 100%;
+  }
+
+  .products-nav-wrap {
+    height: 100%;
+  }
+
+  .products-nav-trigger {
+    height: 100%;
+  }
+}

@@ -49,19 +49,33 @@ export default function SiteHeader() {
   }
 
   return (
-    <header className="site-header">
+    
+<header
+  className="site-header"
+  onMouseLeave={() => setProductsOpen(false)}
+>
+
       <div className="container-wide nav-inner">
         <Link href="/" className="brand-wordmark" aria-label="SKYWORTH Philippines home" onClick={closeMenus}>
           <Image src="/images/SKYWORTH LOGO Black .png" width={583} height={83} alt="SKYWORTH" className="brand-logo" priority />
         </Link>
 
         <nav id="site-menu" aria-label="Main navigation" className={`nav-links ${menuOpen ? "nav-links--open" : ""}`}>
-          <div
-            className="products-nav-wrap"
-            ref={menuRef}
-            onMouseEnter={() => { if (window.matchMedia("(hover: hover) and (min-width: 761px)").matches) setProductsOpen(true); }}
-            onMouseLeave={() => { if (window.matchMedia("(hover: hover) and (min-width: 761px)").matches) setProductsOpen(false); }}
-          >
+          
+<div
+  className="products-nav-wrap"
+  ref={menuRef}
+  onMouseEnter={() => {
+    if (
+      window.matchMedia(
+        "(hover: hover) and (min-width: 761px)"
+      ).matches
+    ) {
+      setProductsOpen(true);
+    }
+  }}
+>
+
             <div className="products-nav-trigger">
               <Link href="/products" className={`nav-link ${pathname.startsWith("/products") ? "nav-link--active" : ""}`} onClick={closeMenus}>Products</Link>
               <button className="products-nav-toggle" type="button" aria-label="Toggle product categories" aria-controls="products-mega-menu" aria-expanded={productsOpen} onClick={() => setProductsOpen(v => !v)}>
