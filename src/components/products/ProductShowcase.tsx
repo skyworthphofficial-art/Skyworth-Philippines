@@ -20,10 +20,19 @@ const selectedVariant = product.sizeVariants.find(
   (variant) => variant.size === selectedSize
 );
 
-const images =
-  selectedVariant && selectedVariant.images.length > 0
-    ? selectedVariant.images
-    : product.images;
+
+const images = selectedVariant
+  ? [
+      ...selectedVariant.images,
+      ...product.images.filter(
+        (generalImage) =>
+          !selectedVariant.images.some(
+            (sizeImage) => sizeImage.url === generalImage.url
+          )
+      ),
+    ]
+  : product.images;
+
 
 const image = images[activeImage];
 
