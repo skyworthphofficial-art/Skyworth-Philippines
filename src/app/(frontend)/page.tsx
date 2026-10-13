@@ -1,107 +1,89 @@
+import Image from "next/image";
+import Link from "next/link";
+import ProductVisual from "@/components/ProductVisual";
+import { getPublishedProducts } from "@/lib/server/publicProducts";
 
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { getPublishedProductBySlug } from "@/lib/server/publicProducts";
-import ProductShowcase from "@/components/products/ProductShowcase";
+export const dynamic = "force-dynamic";
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
+const categoryCards = [
+  { title: "Television", category: "Televisions", caption: "A brilliant view for every moment", visual: "tv" as const, number: "01" },
+  { title: "Audio", category: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "02" },
+  { title: "Commercial Screen", category: "Commercial Screen", caption: "Display solutions for business", visual: "commercial" as const, number: "03" },
+  { title: "Air Conditioner", category: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "04" },
+];
 
-export async function generateMetadata({
-  params,
-}: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const product = await getPublishedProductBySlug(slug);
+export default async function HomePage() {
+  const featuredProducts = (await getPublishedProducts()).slice(0, 3);
+  return <>
+    
+{/* HOMEPAGE HERO BANNER */}
 
-  return {
-    title: product?.seoTitle || product?.name || "Product",
-    description:
-      product?.seoDescription || product?.summary || undefined,
-  };
-}
+{/* HOMEPAGE HERO BANNER */}
+<section
+  className="hero hero--banner"
+  aria-label="SKYWORTH X79K QD-Mini LED TV"
+>
+  <Image
+  src="/images/banners/X79K BANNERS.png"
+  alt="SKYWORTH NEXO X79K QD-Mini LED TV"
+  width={1920}
+  height={794}
+  sizes="100vw"
+  priority
+  unoptimized
+  className="hero-banner-image"
+/>
 
-export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
-  const product = await getPublishedProductBySlug(slug);
+  {/* Product CTA positioned below the feature icons on desktop */}
+  <Link href="/products" className="button button--blue hero-banner-cta">
+    Explore Products <span aria-hidden="true">↗</span>
+  </Link>
+</section>
 
-  if (!product) notFound();
 
-  return (
-    <>
-      <ProductShowcase product={product} />
+    <section className="section section--white" id="discover">
+      <div className="container-wide">
+        <div className="section-heading">
+          <div><span className="eyebrow">MADE FOR YOUR EVERYDAY</span><h2>More than a screen.<br /><span className="muted-heading">More ways to live.</span></h2></div>
+          <p>From unforgettable movie nights to everyday comfort, find the SKYWORTH experience that fits your home.</p>
+        </div>
+        <div className="category-grid">
+          {categoryCards.map(card => <Link href={`/products?category=${encodeURIComponent(card.category)}`} key={card.title} className="category-card">
+            <div className="category-meta"><span>{card.number} / EXPLORE</span><span aria-hidden="true">↗</span></div>
+            <ProductVisual type={card.visual} />
+            <div className="category-bottom"><h3>{card.title}</h3><p>{card.caption}</p></div>
+          </Link>)}
+        </div>
+      </div>
+    </section>
 
-      {product.description.length > 0 && (
-        <section className="section product-content-section">
-          <div className="container-wide">
-            <span className="eyebrow">PRODUCT OVERVIEW</span>
-            <h2 className="detail-subheading">
-              Designed for your everyday.
-            </h2>
+    <section className="technology-feature" id="technology">
+      <div className="container-wide tech-layout">
+        <div className="technology-text"><span className="eyebrow eyebrow--light">THE TECHNOLOGY BEHIND THE MOMENT</span><h2>Every detail<br />deserves to<br /><span>be seen.</span></h2><p>Explore the display ideas, viewing experiences, and thoughtful technology behind SKYWORTH entertainment.</p><Link className="button button--white" href="/technologies">Explore Technology <span aria-hidden="true">↗</span></Link></div>
+        <div className="technology-art" aria-hidden="true"><div className="technology-glow"/><div className="technology-ring technology-ring--one"/><div className="technology-ring technology-ring--two"/><div className="technology-glass"/><div className="technology-glass technology-glass--second"/><span className="technology-note">A CLOSER LOOK AT BRILLIANCE</span></div>
+      </div>
+    </section>
 
-            {product.description.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {product.features.length > 0 && (
-        <section className="section">
-          <div className="container-wide">
-            <span className="eyebrow">PRODUCT HIGHLIGHTS</span>
-            <h2 className="detail-subheading">
-              Discover what matters.
-            </h2>
-
-            <div className="feature-list">
-              {product.features.map((feature, index) => (
-                <div className="feature-item" key={index}>
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{feature}</strong>
-                  <span aria-hidden="true">↗</span>
-                </div>
-              ))}
+    <section className="section section--white" id="featured">
+      <div className="container-wide">
+        <div className="section-heading section-heading--inline"><div><span className="eyebrow">EXPLORE THE COLLECTION</span><h2>Find your<br /><span className="muted-heading">perfect match.</span></h2></div><Link className="text-link" href="/products">View all products <span aria-hidden="true">↗</span></Link></div>
+        {featuredProducts.length > 0 ? <div className="featured-grid">
+          {featuredProducts.map(product => <Link className="featured-card" key={product.id} href={`/products/${product.slug}`}>
+            <div className="featured-card-top"><span>{product.category.toUpperCase()}</span><span aria-hidden="true">↗</span></div>
+            <div className="catalog-product-image">
+              {product.images[0]
+                ? <Image src={product.images[0].url} alt={product.images[0].alt} width={product.images[0].width} height={product.images[0].height} unoptimized />
+                : <span className="catalog-image-fallback">SKYWORTH</span>}
             </div>
-          </div>
-        </section>
-      )}
+            <h3>{product.name}</h3><p>{product.summary || product.modelCode}</p>
+          </Link>)}
+        </div> : <p className="empty-results">Our featured products are coming soon. Explore SKYWORTH&apos;s range of brilliant experiences.</p>}
+      </div>
+    </section>
 
-      {(product.specifications.length > 0 ||
-        product.brochureUrl) && (
-        <section className="section section--soft">
-          <div className="container-wide">
-            <span className="eyebrow">PRODUCT INFORMATION</span>
-            <h2 className="detail-subheading">
-              Specifications & Downloads
-            </h2>
-
-            {product.specifications.length > 0 && (
-              <dl className="product-spec-list">
-                {product.specifications.map(
-                  ({ label, value }, index) => (
-                    <div className="product-spec-row" key={index}>
-                      <dt>{label}</dt>
-                      <dd>{value}</dd>
-                    </div>
-                  )
-                )}
-              </dl>
-            )}
-
-            {product.brochureUrl && (
-              <a
-                className="button button--blue product-brochure"
-                href={product.brochureUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View Product Brochure ↗
-              </a>
-            )}
-          </div>
-        </section>
-      )}
-    </>
-  );
+    <section className="section section--soft" id="dealers"><div className="container-wide dealer-layout">
+      <div><span className="eyebrow">CLOSER TO YOU</span><h2>Experience SKYWORTH<br /><span className="muted-heading">in your own way.</span></h2><p>Browse our product collections and discover where to find SKYWORTH through authorized retail partners.</p><Link className="button button--blue" href="/where-to-buy">Where to Buy <span aria-hidden="true">↗</span></Link></div>
+      <div className="dealer-art"><div className="dealer-card dealer-card--one"><div className="dealer-pin">⌖</div><strong>Explore</strong><small>Available retailers</small></div><div className="dealer-card dealer-card--two"><span className="dealer-small-line"/><span className="dealer-small-line dealer-small-line--short"/><span className="dealer-small-line"/></div></div>
+    </div></section>
+  </>;
 }
