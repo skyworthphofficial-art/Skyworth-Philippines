@@ -22,7 +22,7 @@ These are non-secret IDs. Never commit or share a real DATABASE_URL, role passwo
 5. Copy the connection string privately into `.env.local` at the root of the local Next.js project.
 
 ```dotenv
-DATABASE_URL="postgresql://ROLE:PASSWORD@HOST/neondb?sslmode=require"
+DATABASE_URL="postgresql://ROLE:PASSWORD@HOST/neondb?sslmode=verify-full"
 PAYLOAD_SECRET="GENERATE_A_LONG_RANDOM_SECRET_LOCALLY"
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 ```
