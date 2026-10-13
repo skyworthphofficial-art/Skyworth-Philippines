@@ -326,11 +326,33 @@ button { cursor: pointer; }
 .products-mega-card { position:relative; min-width:0; display:flex; flex-direction:column; padding:14px; border:1px solid #ebeff5; border-radius:10px; background:#f8fafc; transition:background .2s,transform .2s,box-shadow .2s,border-color .2s; }
 .products-mega-card:hover,.products-mega-card:focus-visible { background:#eef6ff; border-color:#a8cbed; box-shadow:0 12px 24px #143d6418; transform:translateY(-4px); }
 .products-mega-count { font-size:9px; letter-spacing:.12em; font-weight:800; color:#6a86a2; }
-.products-mega-art { display:grid; place-items:center; position:relative; height:145px; margin:9px 0 10px; perspective:600px; }
+
+.products-mega-art {
+  display: grid;
+  place-items: center;
+  position: relative;
+  height: 145px;
+  margin: 9px 0 18px;
+  perspective: 600px;
+}
+
 .products-mega-card strong { font-size:clamp(12px,1vw,16px); color:#122b4a; }
 .products-mega-description { margin-top:6px; font-size:11px; color:#69809b; line-height:1.4; }
 .products-mega-arrow { position:absolute; right:12px; bottom:14px; color:#075dbb; font-size:16px; }
-.mega-tv { display:block; width:90%; aspect-ratio:16/10; border:5px solid #131d2b; border-radius:3px; box-shadow:0 12px 18px #153a6340; background:radial-gradient(circle at 74% 22%,#9bdeff,transparent 28%),linear-gradient(140deg,#001636 5%,#006ee6 38%,#31ccda 51%,#111b67 90%); position:relative; }
+
+.mega-tv {
+  display: block;
+  width: min(90%, 210px);
+  aspect-ratio: 16 / 10;
+  border: 5px solid #131d2b;
+  border-radius: 3px;
+  box-shadow: 0 12px 18px #153a6340;
+  background:
+    radial-gradient(circle at 74% 22%, #9bdeff, transparent 28%),
+    linear-gradient(140deg, #001636 5%, #006ee6 38%, #31ccda 51%, #111b67 90%);
+  position: relative;
+}
+
 .mega-tv::after { content:""; width:33%; height:6px; position:absolute; top:100%; left:33%; background:#303d51; clip-path:polygon(40% 0,60% 0,85% 100%,100% 100%,0 100%,15% 100%); }
 .mega-soundbar { position:absolute; top:42%; width:89%; height:18px; border-radius:3px; background:linear-gradient(#334455,#090d14); box-shadow:0 8px 14px #142b4550; }
 .mega-speaker { position:absolute; top:58%; width:29%; height:51px; border-radius:4px; background:linear-gradient(120deg,#283b50,#080e17); box-shadow:0 6px 14px #12284148; }
