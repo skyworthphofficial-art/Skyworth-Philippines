@@ -286,11 +286,14 @@ button { cursor: pointer; }
   background: #07162d;
 }
 
+
 .hero-banner-image {
   display: block;
   width: 100%;
   height: auto;
+  animation: x79kHeroReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
 
 .hero-product-image {
   object-fit: contain;
@@ -369,6 +372,7 @@ button { cursor: pointer; }
 
 
 /* X79K homepage hero CTA - below the printed feature icons */
+
 .hero-banner-cta {
   position: absolute;
   z-index: 2;
@@ -381,7 +385,10 @@ button { cursor: pointer; }
   padding: 0 24px;
   font-size: 13px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
+
+  animation: x79kButtonReveal 0.8s ease-out 0.65s both;
 }
+
 @media (max-width: 760px) {
   .hero-banner-cta {
     position: static;
@@ -444,4 +451,30 @@ button { cursor: pointer; }
 @media(max-width:500px) {
   .product-gallery { grid-template-columns:1fr; }
   .product-spec-row { grid-template-columns:1fr; gap:6px; }
+}
+
+/* SKYWORTH X79K Hero Banner Animation */
+
+@keyframes x79kHeroReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Explore Products Button Animation */
+
+@keyframes x79kButtonReveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
