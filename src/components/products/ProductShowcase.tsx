@@ -16,7 +16,23 @@ export default function ProductShowcase({
     product.sizesInches[0] ?? null
   );
 
-  const image = product.images[activeImage];
+  
+const selectedVariant = product.sizeVariants.find(
+  (variant) => variant.size === selectedSize
+);
+
+const images =
+  selectedVariant && selectedVariant.images.length > 0
+    ? selectedVariant.images
+    : product.images;
+
+const image = images[activeImage];
+
+function selectSize(size: number) {
+  setSelectedSize(size);
+  setActiveImage(0);
+}
+
 
   return (
     <section className="sky-showcase">
@@ -48,12 +64,12 @@ export default function ProductShowcase({
               )}
             </div>
 
-            {product.images.length > 1 && (
+            {images.length > 1 && (
               <div
                 className="sky-showcase-thumbnails"
                 aria-label="Product image gallery"
               >
-                {product.images.map((item, index) => (
+                {images.map((item, index) => (
                   <button
                     key={`${item.url}-${index}`}
                     type="button"
@@ -76,7 +92,7 @@ export default function ProductShowcase({
               </div>
             )}
 
-            {product.images.length > 1 && (
+            {images.length > 1 && (
               <p className="sky-gallery-hint">
                 Select an image to view another angle.
               </p>
@@ -117,7 +133,7 @@ export default function ProductShowcase({
                         selectedSize === size ? "is-active" : ""
                       }`}
                       aria-pressed={selectedSize === size}
-                      onClick={() => setSelectedSize(size)}
+                      onClick={() => selectSize(size)}
                     >
                       {size}"
                     </button>

@@ -214,6 +214,7 @@ export interface Product {
   sizesInches?:
     | {
         size: number;
+        images?: (number | Media)[] | null;
         id?: string | null;
       }[]
     | null;
@@ -475,6 +476,7 @@ export interface ProductsSelect<T extends boolean = true> {
     | T
     | {
         size?: T;
+        images?: T;
         id?: T;
       };
   features?:

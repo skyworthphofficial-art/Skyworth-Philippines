@@ -53,7 +53,22 @@ function toCatalogProduct(product: Product): CatalogProduct {
     categorySlug: category?.slug || "",
     summary: product.summary || "",
     description: richTextParagraphs(product.description),
-    sizesInches: (product.sizesInches || []).map((item) => item.size),
+    
+sizesInches: (product.sizesInches || []).map(
+  (item) => item.size
+),
+
+sizeVariants: (product.sizesInches || []).map(
+  (item) => ({
+    size: item.size,
+    images: (item.images || [])
+      .map(imageFromMedia)
+      .filter(
+        (image): image is CatalogImage => image !== null
+      ),
+  })
+),
+
     features: (product.features || []).map((item) => item.text),
     specifications: (product.specifications || []).map(({ label, value }) => ({ label, value })),
     images: (product.images || []).map(imageFromMedia).filter((image): image is CatalogImage => image !== null),

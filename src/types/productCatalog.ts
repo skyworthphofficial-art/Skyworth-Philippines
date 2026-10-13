@@ -15,7 +15,13 @@ export type CatalogProduct = {
   categorySlug: string;
   summary: string;
   description: string[];
-  sizesInches: number[];
+  
+sizesInches: number[];
+sizeVariants: {
+  size: number;
+  images: CatalogImage[];
+}[];
+
   features: string[];
   specifications: { label: string; value: string }[];
   images: CatalogImage[];
