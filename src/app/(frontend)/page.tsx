@@ -24,14 +24,15 @@ export default async function HomePage() {
   aria-label="SKYWORTH X79K QD-Mini LED TV"
 >
   <Image
-    src="/images/banners/X79K BANNERS.png"
-    alt="SKYWORTH NEXO X79K QD-Mini LED TV"
-    width={1920}
-    height={794}
-    sizes="100vw"
-    priority
-    className="hero-banner-image"
-  />
+  src="/images/banners/X79K BANNERS.webp"
+  alt="SKYWORTH NEXO X79K QD-Mini LED TV"
+  width={1920}
+  height={794}
+  sizes="100vw"
+  priority
+  unoptimized
+  className="hero-banner-image"
+/>
 
   {/* Product CTA positioned below the feature icons on desktop */}
   <Link href="/products" className="button button--blue hero-banner-cta">
