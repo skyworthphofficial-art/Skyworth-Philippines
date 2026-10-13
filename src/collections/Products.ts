@@ -19,6 +19,28 @@ export const Products: CollectionConfig = {
     { name: "category", type: "relationship", relationTo: "categories", required: true },
     { name: "summary", type: "textarea" },
     { name: "description", type: "richText" },
+    
+{
+  name: "sizesInches",
+  type: "array",
+  label: "Available TV Sizes",
+  fields: [
+    {
+      name: "size",
+      type: "number",
+      required: true,
+      label: "Screen Size (inches)",
+    },
+    {
+      name: "images",
+      type: "upload",
+      relationTo: "media",
+      hasMany: true,
+      label: "Images for this Size",
+    },
+  ],
+},
+
     { name: "features", type: "array", fields: [{ name: "text", type: "text", required: true }] },
     { name: "specifications", type: "array", fields: [
       { name: "label", type: "text", required: true },

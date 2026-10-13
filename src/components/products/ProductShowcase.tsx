@@ -12,9 +12,8 @@ export default function ProductShowcase({
   product: CatalogProduct;
 }) {
   const [activeImage, setActiveImage] = useState(0);
-  const [selectedSize, setSelectedSize] = useState<number | null>(
-    product.sizesInches[0] ?? null
-  );
+ const [selectedSize, setSelectedSize] = useState<number | null>(null);
+ 
 
   
 const selectedVariant = product.sizeVariants.find(

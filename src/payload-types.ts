@@ -211,6 +211,13 @@ export interface Product {
     };
     [k: string]: unknown;
   } | null;
+  sizesInches?:
+    | {
+        size: number;
+        images?: (number | Media)[] | null;
+        id?: string | null;
+      }[]
+    | null;
   features?:
     | {
         text: string;
@@ -465,6 +472,13 @@ export interface ProductsSelect<T extends boolean = true> {
   category?: T;
   summary?: T;
   description?: T;
+  sizesInches?:
+    | T
+    | {
+        size?: T;
+        images?: T;
+        id?: T;
+      };
   features?:
     | T
     | {
