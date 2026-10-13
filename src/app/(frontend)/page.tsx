@@ -24,7 +24,7 @@ export default async function HomePage() {
   aria-label="SKYWORTH X79K QD-Mini LED TV"
 >
   <Image
-  src="/images/banners/X79K BANNERS.webp"
+  src="/images/banners/X79K BANNERS.png"
   alt="SKYWORTH NEXO X79K QD-Mini LED TV"
   width={1920}
   height={794}
