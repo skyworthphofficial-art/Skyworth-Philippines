@@ -25,7 +25,13 @@ export default buildConfig({
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URL || "",
+      // The current pg driver already treats these legacy modes as verify-full.
+      // Normalize explicitly so TLS hostname/certificate verification remains
+      // strict and pg-connection-string does not produce a dev error overlay.
+      connectionString: (process.env.DATABASE_URL || "").replace(
+        /([?&])sslmode=(prefer|require|verify-ca)(?=&|$)/gi,
+        "$1sslmode=verify-full",
+      ),
     },
   }),
   secret: process.env.PAYLOAD_SECRET || "",
