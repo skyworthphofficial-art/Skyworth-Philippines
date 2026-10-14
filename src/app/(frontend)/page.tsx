@@ -5,12 +5,42 @@ import { getPublishedProducts } from "@/lib/server/publicProducts";
 
 export const dynamic = "force-dynamic";
 
+
 const categoryCards = [
-  { title: "Television", category: "Televisions", caption: "A brilliant view for every moment", visual: "tv" as const, number: "01" },
-  { title: "Audio", category: "Audio", caption: "Feel every sound", visual: "audio" as const, number: "02" },
-  { title: "Commercial Screen", category: "Commercial Screen", caption: "Display solutions for business", visual: "commercial" as const, number: "03" },
-  { title: "Air Conditioner", category: "Air Conditioners", caption: "Comfort for every space", visual: "aircon" as const, number: "04" },
+  {
+    title: "Television",
+    category: "Televisions",
+    href: "/products/televisions",
+    caption: "A brilliant view for every moment",
+    visual: "tv" as const,
+    number: "01",
+  },
+  {
+    title: "Audio",
+    category: "Audio",
+    href: "/products/audio",
+    caption: "Feel every sound",
+    visual: "audio" as const,
+    number: "02",
+  },
+  {
+    title: "Commercial Screen",
+    category: "Commercial Screen",
+    href: "/products/commercial-screen",
+    caption: "Display solutions for business",
+    visual: "commercial" as const,
+    number: "03",
+  },
+  {
+    title: "Air Conditioner",
+    category: "Air Conditioners",
+    href: "/products/air-conditioners",
+    caption: "Comfort for every space",
+    visual: "aircon" as const,
+    number: "04",
+  },
 ];
+
 
 export default async function HomePage() {
   const featuredProducts = (await getPublishedProducts()).slice(0, 3);
@@ -48,11 +78,19 @@ export default async function HomePage() {
           <p>From unforgettable movie nights to everyday comfort, find the SKYWORTH experience that fits your home.</p>
         </div>
         <div className="category-grid">
-          {categoryCards.map(card => <Link href={`/products?category=${encodeURIComponent(card.category)}`} key={card.title} className="category-card">
+          
+{categoryCards.map(card => (
+  <Link
+    href={card.href}
+    key={card.title}
+    className="category-card"
+  >
+
             <div className="category-meta"><span>{card.number} / EXPLORE</span><span aria-hidden="true">↗</span></div>
             <ProductVisual type={card.visual} />
             <div className="category-bottom"><h3>{card.title}</h3><p>{card.caption}</p></div>
-          </Link>)}
+          </Link>
+))}
         </div>
       </div>
     </section>

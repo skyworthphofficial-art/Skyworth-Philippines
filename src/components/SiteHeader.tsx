@@ -12,12 +12,42 @@ const navigation = [
   { href: "/support", label: "Support" },
 ];
 
+
 const productCategories = [
-  { name: "Television", category: "Televisions", visual: "tv", number: "01", caption: "Brilliant viewing" },
-  { name: "Audio", category: "Audio", visual: "audio", number: "02", caption: "Sound that surrounds" },
-  { name: "Commercial Screen", category: "Commercial Screen", visual: "commercial", number: "03", caption: "Displays for business" },
-  { name: "Air Conditioner", category: "Air Conditioners", visual: "aircon", number: "04", caption: "Everyday comfort" },
+  {
+    name: "Television",
+    category: "Televisions",
+    href: "/products/televisions",
+    visual: "tv",
+    number: "01",
+    caption: "Brilliant viewing",
+  },
+  {
+    name: "Audio",
+    category: "Audio",
+    href: "/products/audio",
+    visual: "audio",
+    number: "02",
+    caption: "Sound that surrounds",
+  },
+  {
+    name: "Commercial Screen",
+    category: "Commercial Screen",
+    href: "/products/commercial-screen",
+    visual: "commercial",
+    number: "03",
+    caption: "Displays for business",
+  },
+  {
+    name: "Air Conditioner",
+    category: "Air Conditioners",
+    href: "/products/air-conditioners",
+    visual: "aircon",
+    number: "04",
+    caption: "Everyday comfort",
+  },
 ];
+
 
 export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -91,7 +121,7 @@ export default function SiteHeader() {
               </div>
               <div className="products-mega-categories">
                 {productCategories.map(item => (
-                  <Link key={item.category} href={`/products?category=${encodeURIComponent(item.category)}`} onClick={closeMenus} className="products-mega-card">
+                <Link key={item.category}href={item.href} onClick={closeMenus}className="products-mega-card">
                     <span className="products-mega-count">{item.number} / PRODUCTS</span>
                     <span className={`products-mega-art products-mega-art--${item.visual}`} aria-hidden="true">
                       {item.visual === "tv" && <span className="mega-tv" />}
