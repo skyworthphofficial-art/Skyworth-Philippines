@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     categories: Category;
+    'product-collections': ProductCollection;
     products: Product;
     dealers: Dealer;
     promotions: Promotion;
@@ -84,6 +85,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'product-collections': ProductCollectionsSelect<false> | ProductCollectionsSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     dealers: DealersSelect<false> | DealersSelect<true>;
     promotions: PromotionsSelect<false> | PromotionsSelect<true>;
@@ -186,6 +188,23 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-collections".
+ */
+export interface ProductCollection {
+  id: number;
+  name: string;
+  /**
+   * Use lowercase letters and hyphens, e.g. mini-led.
+   */
+  slug: string;
+  category: number | Category;
+  description?: string | null;
+  sortOrder?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products".
  */
 export interface Product {
@@ -195,6 +214,10 @@ export interface Product {
   modelCode: string;
   series?: string | null;
   category: number | Category;
+  /**
+   * Assign this product to one or more collections within its main category.
+   */
+  collections?: (number | ProductCollection)[] | null;
   summary?: string | null;
   description?: {
     root: {
@@ -351,6 +374,10 @@ export interface PayloadLockedDocument {
         value: number | Category;
       } | null)
     | ({
+        relationTo: 'product-collections';
+        value: number | ProductCollection;
+      } | null)
+    | ({
         relationTo: 'products';
         value: number | Product;
       } | null)
@@ -462,6 +489,19 @@ export interface CategoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-collections_select".
+ */
+export interface ProductCollectionsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  category?: T;
+  description?: T;
+  sortOrder?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
@@ -470,6 +510,7 @@ export interface ProductsSelect<T extends boolean = true> {
   modelCode?: T;
   series?: T;
   category?: T;
+  collections?: T;
   summary?: T;
   description?: T;
   sizesInches?:

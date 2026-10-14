@@ -8,6 +8,7 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Categories } from "./collections/Categories";
+import { ProductCollections } from "./collections/ProductCollections";
 import { Products } from "./collections/Products";
 import { Dealers } from "./collections/Dealers";
 import { Promotions } from "./collections/Promotions";
@@ -21,7 +22,9 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Users, Media, Categories, Products, Dealers, Promotions, News],
+  
+collections: [ Users,Media, Categories, ProductCollections,Products, Dealers,Promotions,News,],
+
   editor: lexicalEditor(),
   db: postgresAdapter({
     pool: {

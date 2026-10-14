@@ -17,6 +17,8 @@ export const Products: CollectionConfig = {
     { name: "modelCode", type: "text", required: true },
     { name: "series", type: "text" },
     { name: "category", type: "relationship", relationTo: "categories", required: true },
+    { name: "collections",type: "relationship",relationTo: "product-collections",hasMany: true,label: "Product Collections",admin: { description: "Assign this product to one or more collections within its main category.", },},
+
     { name: "summary", type: "textarea" },
     { name: "description", type: "richText" },
     
