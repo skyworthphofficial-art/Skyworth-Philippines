@@ -124,14 +124,7 @@ export default function SiteHeader() {
                 <Link key={item.category}href={item.href} onClick={closeMenus}className="products-mega-card">
                     <span className="products-mega-count">{item.number} / PRODUCTS</span>
                     <span className={`products-mega-art products-mega-art--${item.visual}`} aria-hidden="true">
-                      {item.visual === "tv" && <Image
-                        src="/images/technologies/TV.webp"
-                        alt=""
-                        width={420}
-                        height={280}
-                        className="products-mega-tv-image"
-                        unoptimized
-                      />}
+                      {item.visual === "tv" && <span className="mega-tv" />}
                       {item.visual === "audio" && <><span className="mega-soundbar" /><span className="mega-speaker" /></>}
                       {item.visual === "commercial" && <><span className="mega-signage" /><span className="mega-signage-foot" /></>}
                       {item.visual === "aircon" && <span className="mega-aircon" />}
