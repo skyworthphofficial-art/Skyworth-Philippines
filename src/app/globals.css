@@ -715,3 +715,144 @@ button { cursor: pointer; }
     font-size: 31px;
   }
 }
+
+/* ==========================================
+   SKYWORTH PRODUCT CATEGORY PAGES
+   ========================================== */
+
+.category-page-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+  color: #71839a;
+  font-size: 12px;
+}
+
+.category-page-breadcrumb a {
+  color: #55718f;
+  transition: color 0.2s ease;
+}
+
+.category-page-breadcrumb a:hover {
+  color: #075dbb;
+}
+
+.category-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  min-height: 300px;
+  margin-bottom: 48px;
+  padding: clamp(35px, 6vw, 75px);
+  border-radius: 16px;
+  background: linear-gradient(
+    115deg,
+    #06182e 0%,
+    #07366e 60%,
+    #0872c8 100%
+  );
+  color: white;
+}
+
+.category-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 440px;
+  height: 440px;
+  top: -240px;
+  right: -140px;
+  border: 65px solid rgba(255, 255, 255, 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.category-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.category-hero .eyebrow {
+  color: #9ad8ff;
+  letter-spacing: 0.18em;
+}
+
+.category-hero h1 {
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  margin: 20px 0;
+}
+
+.category-hero p {
+  max-width: 560px;
+  color: #d5e6fa;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.category-hero-decoration {
+  position: absolute;
+  right: -18px;
+  bottom: -25px;
+  color: rgba(255, 255, 255, 0.045);
+  font-size: clamp(80px, 13vw, 200px);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.category-collection-content {
+  min-height: 380px;
+}
+
+.category-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 0 24px;
+}
+
+.category-results-heading h2 {
+  font-size: clamp(21px, 2.5vw, 30px);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.category-results-heading .catalog-count {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .category-hero {
+    min-height: 250px;
+    padding: 32px 25px;
+    margin-bottom: 34px;
+    border-radius: 10px;
+  }
+
+  .category-hero p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .category-hero-decoration {
+    font-size: 85px;
+    bottom: -10px;
+  }
+
+  .category-results-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
