@@ -1,7 +1,18 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
-import type { Product, Media } from "@/payload-types";
-import type { CatalogImage, CatalogProduct } from "@/types/productCatalog";
+
+import type {
+  Product,
+  Media,
+  ProductCollection,
+} from "@/payload-types";
+
+import type {
+  CatalogImage,
+  CatalogProduct,
+  CatalogCollection,
+} from "@/types/productCatalog";
+
 
 // Public website reads must NEVER use Payload's default access override or draft mode.
 const publicStatus = { _status: { equals: "published" as const } };
@@ -51,6 +62,31 @@ function toCatalogProduct(product: Product): CatalogProduct {
     series: product.series || "",
     category: category?.name || "Other Products",
     categorySlug: category?.slug || "",
+    
+collections: (product.collections || [])
+  .filter(
+    (item): item is ProductCollection =>
+      typeof item === "object" && item !== null
+  )
+  .filter((item) => {
+    const collectionCategoryId =
+      typeof item.category === "number"
+        ? item.category
+        : item.category.id;
+
+    const productCategoryId =
+      typeof product.category === "number"
+        ? product.category
+        : product.category.id;
+
+    return collectionCategoryId === productCategoryId;
+  })
+  .map(({ id, name, slug }) => ({
+    id,
+    name,
+    slug,
+  })),
+
     summary: product.summary || "",
     description: richTextParagraphs(product.description),
     
@@ -105,4 +141,96 @@ export async function getPublishedProductBySlug(slug: string): Promise<CatalogPr
     limit: 1,
   });
   return result.docs[0] ? toCatalogProduct(result.docs[0]) : null;
+}
+
+export async function getCategoryCatalog(
+  categoryName: string
+): Promise<{
+  products: CatalogProduct[];
+  collections: CatalogCollection[];
+}> {
+  const payload = await getPayload({ config });
+
+  const categoryResult = await payload.find({
+    collection: "categories",
+    where: {
+      name: {
+        equals: categoryName,
+      },
+    },
+    depth: 0,
+    limit: 1,
+    overrideAccess: false,
+  });
+
+  const category = categoryResult.docs[0];
+
+  if (!category) {
+    return {
+      products: [],
+      collections: [],
+    };
+  }
+
+  const products: CatalogProduct[] = [];
+  const collections: CatalogCollection[] = [];
+
+  // Retrieve all published products for this category.
+  for (let page = 1; ; page++) {
+    const result = await payload.find({
+      collection: "products",
+      where: {
+        and: [
+          publicStatus,
+          {
+            category: {
+              equals: category.id,
+            },
+          },
+        ],
+      },
+      draft: false,
+      overrideAccess: false,
+      depth: 2,
+      sort: "-updatedAt",
+      limit: 100,
+      page,
+    });
+
+    products.push(...result.docs.map(toCatalogProduct));
+
+    if (!result.hasNextPage) break;
+  }
+
+  // Retrieve collections assigned to this category.
+  for (let page = 1; ; page++) {
+    const result = await payload.find({
+      collection: "product-collections",
+      where: {
+        category: {
+          equals: category.id,
+        },
+      },
+      overrideAccess: false,
+      depth: 0,
+      sort: "sortOrder",
+      limit: 100,
+      page,
+    });
+
+    collections.push(
+      ...result.docs.map(({ id, name, slug }) => ({
+        id,
+        name,
+        slug,
+      }))
+    );
+
+    if (!result.hasNextPage) break;
+  }
+
+  return {
+    products,
+    collections,
+  };
 }

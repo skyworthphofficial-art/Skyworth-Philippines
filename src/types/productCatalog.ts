@@ -5,6 +5,13 @@ export type CatalogImage = {
   height: number;
 };
 
+
+export type CatalogCollection = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
 export type CatalogProduct = {
   id: number;
   name: string;
@@ -13,6 +20,7 @@ export type CatalogProduct = {
   series: string;
   category: string;
   categorySlug: string;
+  collections: CatalogCollection[];
   summary: string;
   description: string[];
   
