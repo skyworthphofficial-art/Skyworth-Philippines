@@ -60,7 +60,7 @@ export default async function HomePage() {
   height={794}
   sizes="100vw"
   priority
-  unoptimized
+  quality={75}
   className="hero-banner-image"
 />
 
