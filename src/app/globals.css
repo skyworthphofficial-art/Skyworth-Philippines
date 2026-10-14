@@ -881,7 +881,22 @@ button { cursor: pointer; }
   object-fit: contain;
   object-position: center;
 
-  /* Adjust TV image size */
-  transform: scale(1.20)
+  /* Slightly enlarge without clipping the TV frame */
+  transform: scale(1.08);
 }
 
+
+/* Give all four mega-menu artworks breathing room, lowering their headings. */
+.products-mega-art {
+  height: 176px;
+  margin-bottom: 23px;
+}
+.products-mega-art--tv {
+  overflow: visible;
+}
+@media (max-width: 1150px) {
+  .products-mega-art { height: 143px; }
+}
+@media (max-width: 760px) {
+  .products-mega-art { height: 115px; margin-bottom: 16px; }
+}
