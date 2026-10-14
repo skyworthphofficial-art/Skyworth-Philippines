@@ -129,8 +129,9 @@ export default function SiteHeader() {
                         alt=""
                         width={420}
                         height={280}
+                        sizes="(max-width: 760px) 44vw, (max-width: 1150px) 18vw, 16vw"
+                        quality={70}
                         className="products-mega-tv-image"
-                        unoptimized
                       />}
                       {item.visual === "audio" && <><span className="mega-soundbar" /><span className="mega-speaker" /></>}
                       {item.visual === "commercial" && <><span className="mega-signage" /><span className="mega-signage-foot" /></>}
