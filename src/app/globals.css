@@ -868,6 +868,7 @@ button { cursor: pointer; }
   border-radius: 8px;
 }
 
+
 .products-mega-tv-image {
   display: block;
   flex: 0 1 auto;
@@ -879,4 +880,8 @@ button { cursor: pointer; }
   min-height: 0;
   object-fit: contain;
   object-position: center;
+
+  /* Adjust TV image size */
+  transform: scale(1.20)
 }
+
