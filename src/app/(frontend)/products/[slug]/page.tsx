@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPublishedProductBySlug } from "@/lib/server/publicProducts";
 import ProductShowcase from "@/components/products/ProductShowcase";
+import ProductSpecifications from "@/components/products/ProductSpecifications";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -66,41 +67,28 @@ export default async function ProductPage({ params }: Props) {
         </section>
       )}
 
-      {(product.specifications.length > 0 ||
-        product.brochureUrl) && (
-        <section className="section section--soft">
-          <div className="container-wide">
-            <span className="eyebrow">PRODUCT INFORMATION</span>
-            <h2 className="detail-subheading">
-              Specifications & Downloads
-            </h2>
+      {(product.specificationGroups.length > 0 ||
+  product.brochureUrl) && (
+  <div className="container-wide">
+    <ProductSpecifications
+      key={product.id}
+      groups={product.specificationGroups}
+    />
 
-            {product.specifications.length > 0 && (
-              <dl className="product-spec-list">
-                {product.specifications.map(
-                  ({ label, value }, index) => (
-                    <div className="product-spec-row" key={index}>
-                      <dt>{label}</dt>
-                      <dd>{value}</dd>
-                    </div>
-                  )
-                )}
-              </dl>
-            )}
+    {product.brochureUrl && (
+      <section className="section">
+        <h2 className="detail-subheading">Product Downloads</h2>
 
-            {product.brochureUrl && (
-              <a
-                className="button button--blue product-brochure"
-                href={product.brochureUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View Product Brochure ↗
-              </a>
-            )}
-          </div>
-        </section>
-      )}
-    </>
-  );
-}
+        <a
+          className="button button--blue product-brochure"
+          href={product.brochureUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View Product Brochure ↗
+        </a>
+      </section>
+    )}
+  </div>
+)}
+ 

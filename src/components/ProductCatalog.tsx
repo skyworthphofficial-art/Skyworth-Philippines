@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+export type CatalogSpecificationGroup = {id: string;title: string;items: {id: string;label: string;value: string;}[];};
 import type { CatalogProduct } from "@/types/productCatalog";
 
 type Props = { products: CatalogProduct[] };

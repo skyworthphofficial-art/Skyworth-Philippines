@@ -254,6 +254,22 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Up to 7 titles, each with 10 label/value rows. Empty entries stay hidden on the website.
+   */
+  specificationGroups?:
+    | {
+        title?: string | null;
+        items?:
+          | {
+              label?: string | null;
+              value?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   images?: (number | Media)[] | null;
   brochure?: (number | null) | Media;
   seoTitle?: string | null;
@@ -531,6 +547,19 @@ export interface ProductsSelect<T extends boolean = true> {
     | {
         label?: T;
         value?: T;
+        id?: T;
+      };
+  specificationGroups?:
+    | T
+    | {
+        title?: T;
+        items?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
         id?: T;
       };
   images?: T;

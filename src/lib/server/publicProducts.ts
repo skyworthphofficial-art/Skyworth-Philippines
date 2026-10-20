@@ -11,6 +11,7 @@ import type {
   CatalogImage,
   CatalogProduct,
   CatalogCollection,
+  CatalogSpecificationGroup,
 } from "@/types/productCatalog";
 
 
@@ -45,7 +46,48 @@ function richTextParagraphs(value: Product["description"]): string[] {
   }
   return value.root.children.map(textOf).map((line) => line.trim()).filter(Boolean);
 }
+function getSpecificationGroups(
+  product: Product
+): CatalogSpecificationGroup[] {
+  const groups: CatalogSpecificationGroup[] = (
+    product.specificationGroups || []
+  )
+    .slice(0, 7)
+    .map((group, groupIndex) => ({
+      id: group.id || `group-${groupIndex}`,
+      title: (group.title || "").trim(),
+      items: (group.items || [])
+        .slice(0, 10)
+        .map((item, itemIndex) => ({
+          id: item.id || `item-${groupIndex}-${itemIndex}`,
+          label: (item.label || "").trim(),
+          value: (item.value || "").trim(),
+        }))
+        .filter((item) => item.label !== "" && item.value !== ""),
+    }))
+    .filter((group) => group.title !== "" && group.items.length > 0);
 
+  if (groups.length > 0) return groups;
+
+  // Keep existing specifications visible until grouped data is entered.
+  const legacyItems = (product.specifications || [])
+    .map((item, index) => ({
+      id: item.id || `legacy-${index}`,
+      label: (item.label || "").trim(),
+      value: (item.value || "").trim(),
+    }))
+    .filter((item) => item.label !== "" && item.value !== "");
+
+  return legacyItems.length > 0
+    ? [
+        {
+          id: "legacy-specifications",
+          title: "Specifications",
+          items: legacyItems,
+        },
+      ]
+    : [];
+}
 function toCatalogProduct(product: Product): CatalogProduct {
   const category = typeof product.category === "object" && product.category
     ? product.category
@@ -128,6 +170,7 @@ export async function getPublishedProducts(): Promise<CatalogProduct[]> {
     limit: 100,
   });
   return result.docs.map(toCatalogProduct);
+  
 }
 
 export async function getPublishedProductBySlug(slug: string): Promise<CatalogProduct | null> {
