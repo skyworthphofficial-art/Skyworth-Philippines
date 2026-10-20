@@ -142,9 +142,9 @@ function selectSize(size: number) {
                       }`}
                       aria-pressed={selectedSize === size}
                       onClick={() => selectSize(size)}
-                    >
-                      {size}"
-                    </button>
+>
+  {size}&quot;
+</button>
                   ))}
                 </div>
               </div>
