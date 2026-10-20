@@ -12,6 +12,16 @@ export type CatalogCollection = {
   slug: string;
 };
 
+export type CatalogSpecificationGroup = {
+  id: string;
+  title: string;
+  items: {
+    id: string;
+    label: string;
+    value: string;
+  }[];
+};
+
 export type CatalogProduct = {
   id: number;
   name: string;
@@ -30,8 +40,9 @@ sizeVariants: {
   images: CatalogImage[];
 }[];
 
-  features: string[];
+    features: string[];
   specifications: { label: string; value: string }[];
+  specificationGroups: CatalogSpecificationGroup[];
   images: CatalogImage[];
   brochureUrl: string | null;
   seoTitle: string | null;

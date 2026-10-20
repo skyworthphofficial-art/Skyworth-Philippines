@@ -147,9 +147,17 @@ sizeVariants: (product.sizesInches || []).map(
   })
 ),
 
-    features: (product.features || []).map((item) => item.text),
-    specifications: (product.specifications || []).map(({ label, value }) => ({ label, value })),
-    images: (product.images || []).map(imageFromMedia).filter((image): image is CatalogImage => image !== null),
+        features: (product.features || []).map((item) => item.text),
+
+    specifications: (product.specifications || []).map(
+      ({ label, value }) => ({ label, value })
+    ),
+
+    specificationGroups: getSpecificationGroups(product),
+
+    images: (product.images || [])
+      .map(imageFromMedia)
+      .filter((image): image is CatalogImage => image !== null),
     brochureUrl: brochureUrl && (brochureUrl.startsWith("/") && !brochureUrl.startsWith("//") || brochureUrl.startsWith("https://"))
       ? brochureUrl
       : null,
