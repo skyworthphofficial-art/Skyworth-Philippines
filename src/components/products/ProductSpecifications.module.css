@@ -1,116 +1,155 @@
-.section {
+.specifications {
+  width: 100%;
   min-width: 0;
-  padding-block: 48px;
-  color: #111;
+  padding: 56px 0;
   background: #fff;
+  color: #111;
 }
 
-.heading {
-  margin: 0 0 32px;
-  font-size: clamp(24px, 3vw, 30px);
+.specifications .heading {
+  margin: 0 0 36px;
+  font-size: clamp(24px, 2.4vw, 30px);
   font-weight: 600;
   line-height: 1.3;
+  letter-spacing: -0.025em;
 }
 
 .navigation {
   display: flex;
+  align-items: stretch;
+  gap: 8px;
   width: 100%;
   overflow-x: auto;
   border-bottom: 1px solid #dedede;
   scrollbar-width: thin;
 }
 
-.button {
+.specifications .categoryButton {
+  appearance: none;
   flex: 0 0 auto;
+  display: block;
   margin: 0;
   padding: 18px 20px;
   border: 0;
   border-bottom: 3px solid transparent;
+  border-radius: 0;
   background: transparent;
-  color: #737373;
+  color: #757575;
   font: inherit;
   font-size: 14px;
-  line-height: 1.4;
+  font-weight: 400;
+  line-height: 1.5;
   white-space: nowrap;
   cursor: pointer;
 }
 
-.button[aria-pressed="true"] {
+.specifications .categoryButton:hover {
+  color: #111;
+}
+
+.specifications .categoryButton[aria-pressed="true"] {
   border-bottom-color: #111;
   color: #111;
   font-weight: 600;
 }
 
-.button:focus-visible {
+.specifications .categoryButton:focus-visible {
   outline: 2px solid #005bbb;
-  outline-offset: -4px;
+  outline-offset: -5px;
 }
 
 .panel {
-  padding-top: 48px;
+  padding-top: 52px;
 }
 
 .panel[hidden] {
   display: none;
 }
 
-.list {
+.specifications .table {
+  display: table;
+  width: 100%;
   margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background: transparent;
 }
 
-.row {
-  display: grid;
-  grid-template-columns: minmax(0, 44%) minmax(0, 56%);
-  padding: 20px 24px;
+.table tbody {
+  display: table-row-group;
+}
+
+.table tr {
+  display: table-row;
+}
+
+.specifications .table th,
+.specifications .table td {
+  display: table-cell;
+  padding: 19px 24px;
+  border: 0;
   border-bottom: 1px solid #e3e3e3;
+  background: transparent;
+  text-align: left;
+  vertical-align: top;
   font-size: 14px;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
-.row:last-child {
+.specifications .table th {
+  width: 40%;
+  color: #111;
+  font-weight: 600;
+}
+
+.specifications .table td {
+  width: 60%;
+  color: #333;
+  font-weight: 400;
+  white-space: pre-line;
+}
+
+.table tr:last-child th,
+.table tr:last-child td {
   border-bottom: 0;
 }
 
-.row dt {
-  margin: 0;
-  padding-right: 20px;
-  font-weight: 600;
-  overflow-wrap: anywhere;
-}
-
-.row dd {
-  min-width: 0;
-  margin: 0;
-  color: #333;
-  white-space: pre-line;
-  overflow-wrap: anywhere;
-}
-
 @media (max-width: 640px) {
-  .section {
-    padding-block: 32px;
+  .specifications {
+    padding: 32px 0;
   }
 
-  .heading {
-    margin-bottom: 20px;
+  .specifications .heading {
+    margin-bottom: 24px;
+    font-size: 24px;
   }
 
-  .button {
+  .navigation {
+    gap: 0;
+  }
+
+  .specifications .categoryButton {
     padding: 14px 16px;
     font-size: 13px;
   }
 
   .panel {
-    padding-top: 24px;
+    padding-top: 28px;
   }
 
-  .row {
-    grid-template-columns: minmax(0, 42%) minmax(0, 58%);
-    padding: 16px 8px;
+  .specifications .table th,
+  .specifications .table td {
+    padding: 16px 10px;
     font-size: 13px;
   }
 
-  .row dt {
-    padding-right: 12px;
+  .specifications .table th {
+    width: 44%;
+  }
+
+  .specifications .table td {
+    width: 56%;
   }
 }

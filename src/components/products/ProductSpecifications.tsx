@@ -20,7 +20,7 @@ export default function ProductSpecifications({ groups }: Props) {
 
   return (
     <section
-      className={styles.section}
+      className={styles.specifications}
       aria-labelledby={`${instanceId}-heading`}
     >
       <h2 id={`${instanceId}-heading`} className={styles.heading}>
@@ -32,42 +32,44 @@ export default function ProductSpecifications({ groups }: Props) {
         role="group"
         aria-label="Specification categories"
       >
-        {groups.map((group, index) => {
-          const active = group.id === activeId;
-
-          return (
-            <button
-              key={group.id}
-              id={`${instanceId}-button-${index}`}
-              type="button"
-              className={styles.button}
-              aria-pressed={active}
-              aria-controls={`${instanceId}-panel-${index}`}
-              onClick={() => setSelectedId(group.id)}
-            >
-              {group.title}
-            </button>
-          );
-        })}
+        {groups.map((group, index) => (
+          <button
+            key={group.id}
+            id={`${instanceId}-button-${index}`}
+            type="button"
+            className={styles.categoryButton}
+            aria-pressed={group.id === activeId}
+            aria-controls={`${instanceId}-panel-${index}`}
+            onClick={() => setSelectedId(group.id)}
+          >
+            {group.title}
+          </button>
+        ))}
       </div>
 
       {groups.map((group, index) => (
-        <section
+        <div
           key={group.id}
           id={`${instanceId}-panel-${index}`}
+          role="region"
           aria-labelledby={`${instanceId}-button-${index}`}
           hidden={group.id !== activeId}
           className={styles.panel}
         >
-          <dl className={styles.list}>
-            {group.items.map((item) => (
-              <div key={item.id} className={styles.row}>
-                <dt>{item.label}</dt>
-                <dd>{item.value}</dd>
-              </div>
-            ))}
-          </dl>
-        </section>
+          <table
+            className={styles.table}
+            aria-label={`${group.title} specifications`}
+          >
+            <tbody>
+              {group.items.map((item) => (
+                <tr key={item.id}>
+                  <th scope="row">{item.label}</th>
+                  <td>{item.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ))}
     </section>
   );
